@@ -1,0 +1,12 @@
+<tr id="<%= post.id %>">
+    <td><%= post.title %></td>
+    <td><%= post.content %></td>
+    <td><%= post.comments.count %></td>
+    <td><%= link_to 'Detalle', post, remote: true %></td>
+    <td>
+        <%= link_to 'Editar', edit_post_path(post), remote: true %>
+    </td>
+    <td>
+        <%= link_to 'Eliminar', post_path(post), method: :delete, remote: true, data: { confirm: 'Estas seguro?'} %>
+    </td>
+</tr>

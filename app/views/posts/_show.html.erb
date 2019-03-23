@@ -1,0 +1,35 @@
+<h5><%= post.title %></h5>
+<p><%= post.content %></p>
+<p><%# post.id %></p>
+
+<%= image_tag url_for(post.image.variant(resize: '250x250')) %>
+<br>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Comenta</h5>
+        
+        <%# <input type="button" value="Comentar" id="comentar" class="btn btn-sm btn-outline-success"> %>
+
+        <%= form_with(model:[post, Comment.new]) do |f|%>
+            <%= f.text_area :content, class: 'form-control' %>
+            <%#= f.hidden_field :user_id , value: current_user.id %>
+
+            <%#= f.hidden_field :post_id , value: post.id %>
+
+            <%= f.submit "Comentar", disable_with: 'Submiting...', class: 'btn btn-sm btn-outline-success' %>
+        <% end %>
+                
+    </div>
+</div>
+
+<div class="card">
+    <div id="list-comment"class="card-body">
+        <h4 class="card-title">Otros comentarios</h4>
+        
+        <% post.comments.each do |c| %>
+            <p class="bg-light" id="<%= c.id%>"><%= c.content %> <span class="text-secondary">by</span> <%= c.user.name %></p>
+        <% end %>
+        
+    </div>
+</div>
+
